@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>David Zaref | Cloud & Cybersecurity Engineer</title>
-    <!-- Google Fonts & FontAwesome -->
+
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -35,7 +35,7 @@
             position: relative;
         }
 
-        /* Matrix Digital Rain Canvas Background */
+        
         #matrix-canvas {
             position: fixed;
             top: 0;
@@ -51,7 +51,7 @@
             font-family: 'Fira Code', monospace;
         }
 
-        /* Mouse Spotlight Follower */
+        
         .spotlight {
             position: fixed;
             width: 500px;
@@ -64,7 +64,7 @@
             z-index: 1;
         }
 
-        /* Header & Navigation */
+        
         header {
             position: fixed;
             top: 0;
@@ -109,7 +109,7 @@
             text-shadow: 0 0 8px rgba(0,255,102,0.5);
         }
 
-        /* Main Container */
+        
         .container {
             max-width: 1100px;
             margin: 0 auto;
@@ -134,7 +134,7 @@
             transform: translateY(0);
         }
 
-        /* Hero Section */
+        
         #hero {
             min-height: 100vh;
             display: flex;
@@ -216,7 +216,7 @@
             transform: translateY(-3px);
         }
 
-        /* Hero Image Box */
+        
         .hero-img-box {
             position: relative;
             width: 320px;
@@ -255,7 +255,7 @@
             border: 1px solid var(--border-color);
         }
 
-        /* Section Titles */
+        
         .section-title {
             font-size: 2.2rem;
             margin-bottom: 40px;
@@ -270,7 +270,7 @@
             font-size: 1.2rem;
         }
 
-        /* About Section */
+        
         .about-grid {
             display: grid;
             grid-template-columns: 2fr 1fr;
@@ -305,7 +305,7 @@
             font-size: 0.95rem;
         }
 
-        /* Skills Section */
+        
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -346,7 +346,7 @@
             gap: 8px;
         }
 
-        /* Projects Section */
+        
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -399,7 +399,7 @@
             font-family: 'Fira Code', monospace;
         }
 
-        /* Certifications Section */
+        
         .certs-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -456,7 +456,7 @@
             margin-bottom: 15px;
         }
 
-        /* Contact Section */
+        
         .contact-box {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -501,7 +501,7 @@
             border-color: var(--accent-green);
         }
 
-        /* Toast Notification */
+        
         #toast {
             visibility: hidden;
             min-width: 260px;
@@ -540,7 +540,7 @@
     <canvas id="matrix-canvas"></canvas>
     <div class="spotlight" id="spotlight"></div>
 
-    <!-- Header -->
+    
     <header id="navbar">
         <a href="#hero" class="logo">&lt;David.Zaref /&gt;</a>
         <nav>
@@ -556,7 +556,7 @@
 
     <div class="container">
 
-        <!-- Hero Section -->
+        
         <section id="hero" class="reveal">
             <div class="hero-content">
                 <span class="tag"><i class="fa-solid fa-shield-halved"></i> Cloud & Cybersecurity Practitioner</span>
@@ -575,7 +575,7 @@
             </div>
         </section>
 
-        <!-- About Section -->
+        
         <section id="about" class="reveal">
             <h2 class="section-title"><span>01.</span> About Me</h2>
             <div class="about-grid">
@@ -590,7 +590,7 @@
             </div>
         </section>
 
-        <!-- Skills Section -->
+        
         <section id="skills" class="reveal">
             <h2 class="section-title"><span>02.</span> Technical Toolkit</h2>
             <div class="skills-grid">
@@ -637,7 +637,7 @@
             </div>
         </section>
 
-        <!-- Projects Section -->
+        
         <section id="projects" class="reveal">
             <h2 class="section-title"><span>03.</span> Key Projects & Experience</h2>
             <div class="projects-grid">
@@ -683,7 +683,7 @@
             </div>
         </section>
 
-        <!-- Certifications Section -->
+        
         <section id="certs" class="reveal">
             <h2 class="section-title"><span>04.</span> Certifications</h2>
             <div class="certs-grid">
@@ -733,7 +733,7 @@
             </div>
         </section>
 
-        <!-- Contact Section -->
+        
         <section id="contact" class="reveal">
             <h2 class="section-title" style="justify-content: center;"><span>05.</span> Get In Touch</h2>
             <div class="contact-box">
@@ -753,9 +753,9 @@
         <p>© 2026 David Zaref. Built with focus on clean code and design.</p>
     </footer>
 
-    <!-- JavaScript -->
+    
     <script>
-        // Matrix Rain Background
+        
         const canvas = document.getElementById('matrix-canvas');
         const ctx = canvas.getContext('2d');
         function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
@@ -782,14 +782,14 @@
         }
         setInterval(drawMatrix, 30);
 
-        // Mouse Spotlight
+        
         const spotlight = document.getElementById('spotlight');
         window.addEventListener('mousemove', (e) => {
             spotlight.style.left = e.clientX + 'px';
             spotlight.style.top = e.clientY + 'px';
         });
 
-        // Typing Effect
+        
         const words = ["Cloud Security Engineer", "Cybersecurity Engineer", "AWS Infrastructure Auditor", "Python Security Developer"];
         let i = 0;
         function typingEffect() {
@@ -818,7 +818,7 @@
         }
         typingEffect();
 
-        // Scroll Reveal
+        
         window.addEventListener('DOMContentLoaded', () => {
             const reveals = document.querySelectorAll('.reveal');
             const observer = new IntersectionObserver((entries) => {
@@ -827,7 +827,7 @@
             reveals.forEach(reveal => observer.observe(reveal));
         });
 
-        // Clipboard Copy
+        
         function copyToClipboard(text, message) {
             navigator.clipboard.writeText(text).then(() => { showToast(message); });
         }
