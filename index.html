@@ -3,122 +3,439 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>David Zaref - Portfolio</title>
+    <title>David Zaref | Cloud & Cybersecurity Engineer</title>
+    <!-- Google Fonts & FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
         :root {
-            --bg-dark: #0a0e17;
-            --card-bg: #111827;
+            --bg-color: #07090e;
+            --card-bg: #0d121c;
+            --accent-green: #00ff66;
+            --accent-cyan: #00e5ff;
             --text-main: #e2e8f0;
             --text-muted: #94a3b8;
-            --accent-green: #10b981;
-            --accent-cyan: #06b6d4;
-            --border-color: #1f2937;
+            --border-color: #1a2332;
+            --glow: 0 0 25px rgba(0, 255, 102, 0.25);
         }
 
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
         }
 
         body {
-            background-color: var(--bg-dark);
+            background-color: var(--bg-color);
             color: var(--text-main);
-            line-height: 1.6;
-            padding: 40px 20px;
-            max-width: 1000px;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Matrix Digital Rain Canvas Background */
+        #matrix-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.12;
+        }
+
+        code, .terminal-font {
+            font-family: 'Fira Code', monospace;
+        }
+
+        /* Mouse Spotlight Follower */
+        .spotlight {
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(0, 255, 102, 0.06) 0%, rgba(0, 0, 0, 0) 70%);
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+        }
+
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(7, 9, 14, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            z-index: 1000;
+            transition: 0.3s ease;
+        }
+
+        .logo {
+            font-family: 'Fira Code', monospace;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--accent-green);
+            text-decoration: none;
+            text-shadow: 0 0 10px rgba(0,255,102,0.4);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav ul li a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent-green);
+            text-shadow: 0 0 8px rgba(0,255,102,0.5);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1100px;
             margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
         }
 
         section {
-            margin-bottom: 50px;
+            padding: 110px 0 70px 0;
+            border-bottom: 1px solid var(--border-color);
         }
 
-        .section-title {
-            font-size: 1.8rem;
-            margin-bottom: 25px;
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Hero Section */
+        #hero {
+            min-height: 100vh;
             display: flex;
             align-items: center;
-            gap: 10px;
+            justify-content: space-between;
+            gap: 40px;
+        }
+
+        .hero-content h1 {
+            font-size: 3.3rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .hero-content h1 span {
+            color: var(--accent-green);
+            text-shadow: 0 0 15px rgba(0,255,102,0.4);
+        }
+
+        .typing-container {
+            font-size: 1.3rem;
+            color: var(--accent-cyan);
+            margin-bottom: 30px;
+            font-family: 'Fira Code', monospace;
+            min-height: 40px;
+        }
+
+        .tag {
+            display: inline-block;
+            background: rgba(0, 255, 102, 0.1);
+            color: var(--accent-green);
+            padding: 6px 14px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            border: 1px solid rgba(0, 255, 102, 0.3);
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 28px;
+            border-radius: 6px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: 0.3s;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--accent-green);
+            color: #000;
+            box-shadow: var(--glow);
+        }
+
+        .btn-primary:hover {
+            background: #00cc52;
+            transform: translateY(-3px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+            transform: translateY(-3px);
+        }
+
+        /* Hero Image Box */
+        .hero-img-box {
+            position: relative;
+            width: 320px;
+            height: 380px;
+            border-radius: 12px;
+            border: 2px solid var(--border-color);
+            background: var(--card-bg);
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.7);
+            transition: 0.5s;
+        }
+
+        .hero-img-box:hover {
+            border-color: var(--accent-green);
+            box-shadow: 0 0 35px rgba(0, 255, 102, 0.4);
+        }
+
+        .hero-img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(10%) contrast(110%);
+        }
+
+        .img-placeholder-badge {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            right: 10px;
+            background: rgba(7, 9, 14, 0.92);
+            padding: 8px;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--accent-cyan);
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Section Titles */
+        .section-title {
+            font-size: 2.2rem;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
 
         .section-title span {
             color: var(--accent-green);
-            font-family: monospace;
+            font-family: 'Fira Code', monospace;
+            font-size: 1.2rem;
         }
 
-        /* Projects Grid */
+        /* About Section */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .about-text p {
+            color: var(--text-muted);
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+        }
+
+        .stat-box {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .stat-box h3 {
+            font-size: 1.8rem;
+            color: var(--accent-green);
+            margin-bottom: 8px;
+            font-family: 'Fira Code', monospace;
+        }
+
+        .stat-box p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .skill-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 30px;
+            border-radius: 12px;
+            transition: 0.4s;
+        }
+
+        .skill-card:hover {
+            border-color: var(--accent-green);
+            transform: translateY(-8px);
+        }
+
+        .skill-card i {
+            font-size: 2.2rem;
+            color: var(--accent-green);
+            margin-bottom: 15px;
+        }
+
+        .skill-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+            color: #fff;
+        }
+
+        .skill-card ul {
+            list-style: none;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        /* Projects Section */
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
         }
 
         .project-card {
-            background-color: var(--card-bg);
+            background: var(--card-bg);
             border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 24px;
+            border-radius: 12px;
+            padding: 35px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            transition: 0.4s;
+        }
+
+        .project-card:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-8px);
         }
 
         .project-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
             color: #fff;
-            margin-bottom: 12px;
-            font-size: 1.2rem;
         }
 
         .project-card p {
             color: var(--text-muted);
             font-size: 0.95rem;
-            margin-bottom: 16px;
+            line-height: 1.7;
+            margin-bottom: 20px;
         }
 
         .tech-tags {
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
         .tech-tags span {
-            background: rgba(16, 185, 129, 0.1);
-            color: var(--accent-green);
+            background: rgba(0, 229, 255, 0.05);
+            color: var(--accent-cyan);
+            border: 1px solid rgba(0, 229, 255, 0.2);
+            padding: 4px 10px;
+            border-radius: 4px;
             font-size: 0.8rem;
-            padding: 3px 10px;
-            border-radius: 12px;
-            font-family: monospace;
+            font-family: 'Fira Code', monospace;
         }
 
-        /* Certs Grid */
+        /* Certifications Section */
         .certs-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 25px;
         }
 
         .cert-card {
-            background-color: var(--card-bg);
+            background: var(--card-bg);
             border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 20px;
+            border-radius: 12px;
+            padding: 25px;
             text-align: center;
+            transition: 0.4s;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: space-between;
         }
 
+        .cert-card:hover {
+            border-color: var(--accent-green);
+            transform: translateY(-8px);
+            box-shadow: var(--glow);
+        }
+
         .cert-img-container {
-            width: 80px;
-            height: 80px;
+            width: 100px;
+            height: 100px;
             margin-bottom: 15px;
             border-radius: 8px;
             overflow: hidden;
+            background: rgba(255,255,255,0.02);
+            border: 1px dashed var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .cert-img-container img {
@@ -128,183 +445,414 @@
         }
 
         .cert-card h4 {
-            color: #fff;
-            font-size: 1rem;
+            font-size: 1.1rem;
             margin-bottom: 5px;
+            color: #fff;
         }
 
         .cert-card span {
             color: var(--text-muted);
             font-size: 0.85rem;
-            display: block;
+            margin-bottom: 15px;
         }
 
-        /* Buttons & Links */
-        .btn-pdf {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
+        .cert-link {
+            font-size: 0.75rem;
             color: var(--accent-green);
-            border: 1px solid var(--accent-green);
-            padding: 8px 16px;
-            border-radius: 6px;
+            margin-top: 10px;
             text-decoration: none;
-            font-size: 0.85rem;
-            transition: all 0.3s ease;
-        }
-
-        .btn-pdf:hover {
-            background: rgba(16, 185, 129, 0.1);
-        }
-
-        .cert-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            margin-top: 12px;
-            font-size: 0.85rem;
-            padding: 4px 14px;
+            border: 1px solid rgba(0, 255, 102, 0.3);
+            padding: 4px 12px;
             border-radius: 4px;
+            transition: 0.3s;
+        }
+
+        .cert-link:hover {
+            background: rgba(0, 255, 102, 0.1);
+            box-shadow: 0 0 10px rgba(0,255,102,0.3);
+        }
+
+        /* Contact Section */
+        .contact-box {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 50px;
+            text-align: center;
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        .contact-box p {
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .contact-btn {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border-color);
+            padding: 14px 28px;
+            border-radius: 8px;
+            color: var(--text-main);
             text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: 0.3s;
+            font-weight: 600;
+            cursor: pointer;
         }
 
-        .cert-badge.green {
+        .contact-btn:hover {
+            background: var(--accent-green);
+            color: #000;
+            border-color: var(--accent-green);
+        }
+
+        /* Toast Notification */
+        #toast {
+            visibility: hidden;
+            min-width: 260px;
+            background-color: var(--card-bg);
             color: var(--accent-green);
+            text-align: center;
             border: 1px solid var(--accent-green);
+            border-radius: 8px;
+            padding: 16px;
+            position: fixed;
+            z-index: 2000;
+            left: 50%;
+            bottom: 30px;
+            transform: translateX(-50%);
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            transition: 0.4s ease;
         }
 
-        .cert-badge.cyan {
-            color: var(--accent-cyan);
-            border: 1px solid var(--accent-cyan);
+        #toast.show {
+            visibility: visible;
+            bottom: 50px;
         }
 
-        .cert-badge.static {
-            cursor: default;
+        footer {
+            text-align: center;
+            padding: 35px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
         }
     </style>
 </head>
 <body>
 
-    <!-- 03. Key Projects & Experience -->
-    <section id="projects">
-        <h2 class="section-title"><span>03.</span> Key Projects & Experience</h2>
-        <div class="projects-grid">
-            
-            <!-- Project 1 -->
-            <div class="project-card">
-                <div>
-                    <h3>Malware Analysis Assistant (MAA)</h3>
-                    <p>Led the development of a framework designed to streamline malware investigation. It helps analysts inspect suspicious files, analyze network packets, and generate quick triage reports.</p>
-                    <div class="tech-tags">
-                        <span>Python</span>
-                        <span>Scapy</span>
-                        <span>PyTorch</span>
-                        <span>FastAPI</span>
-                    </div>
+    <canvas id="matrix-canvas"></canvas>
+    <div class="spotlight" id="spotlight"></div>
+
+    <!-- Header -->
+    <header id="navbar">
+        <a href="#hero" class="logo">&lt;David.Zaref /&gt;</a>
+        <nav>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#certs">Certifications</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+
+        <!-- Hero Section -->
+        <section id="hero" class="reveal">
+            <div class="hero-content">
+                <span class="tag"><i class="fa-solid fa-shield-halved"></i> Cloud & Cybersecurity Practitioner</span>
+                <h1>Hi, I'm <span>David Zaref</span></h1>
+                <div class="typing-container" id="typing-text"></div>
+                <div class="btn-group">
+                    <button class="btn btn-primary" onclick="copyToClipboard('daz10675404@gmail.com', 'Email copied!')"><i class="fa-solid fa-envelope"></i> daz10675404@gmail.com</button>
+                    <a href="https://www.linkedin.com/in/david-zaref-397917376" target="_blank" class="btn btn-outline"><i class="fa-brands fa-linkedin"></i> LinkedIn Profile</a>
                 </div>
-                <a href="prot/maa-project.pdf" target="_blank" class="btn-pdf">
-                    <i class="fa-solid fa-file-pdf"></i> View Project PDF
-                </a>
             </div>
-
-            <!-- Project 2 -->
-            <div class="project-card">
-                <div>
-                    <h3>Attack Simulation & Mitigation Lab</h3>
-                    <p>Simulated brute-force login attempts using Hydra to evaluate authentication weaknesses. Designed defense strategies including custom fail2ban rules and multi-factor authentication requirements.</p>
-                    <div class="tech-tags">
-                        <span>Hydra</span>
-                        <span>Linux Hardening</span>
-                        <span>fail2ban</span>
-                        <span>MFA</span>
-                    </div>
+            <div class="hero-img-box">
+                <img src="3.jpeg" alt="David Zaref" onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&auto=format&fit=crop&q=60'">
+                <div class="img-placeholder-badge">
+                    <i class="fa-solid fa-terminal"></i> Security & Cloud Engineer
                 </div>
-                <a href="prot/hydra-lab.pdf" target="_blank" class="btn-pdf">
-                    <i class="fa-solid fa-file-pdf"></i> View Project PDF
-                </a>
             </div>
+        </section>
 
-            <!-- Project 3 -->
-            <div class="project-card">
-                <div>
-                    <h3>DEPI Cloud Security Track</h3>
-                    <p>Participated in intensive AWS practical labs, implementing strict identity permissions, setting up isolated subnets, and scripting cloud monitoring tasks.</p>
-                    <div class="tech-tags">
-                        <span>AWS IAM</span>
-                        <span>VPC Isolation</span>
-                        <span>EC2</span>
-                        <span>CloudWatch</span>
-                    </div>
+        <!-- About Section -->
+        <section id="about" class="reveal">
+            <h2 class="section-title"><span>01.</span> About Me</h2>
+            <div class="about-grid">
+                <div class="about-text">
+                    <p>Computer Science graduate specializing in Cybersecurity from Egyptian Chinese University.</p>
+                    <p>My focus is centered on securing cloud environments and auditing network infrastructure. I work on assessing system vulnerabilities, configuring access controls, and writing Python automation scripts for routine security checks. Through programs like DEPI and NTI, I've spent substantial time in hands-on labs simulating attack vectors and strengthening cloud setups.</p>
                 </div>
-                <a href="prot/depi-track.pdf" target="_blank" class="btn-pdf">
-                    <i class="fa-solid fa-file-pdf"></i> View Track PDF
-                </a>
+                <div class="stat-box">
+                    <h3>3.2 CGPA</h3>
+                    <p>GPA / Excellent Honors</p>
+                </div>
             </div>
+        </section>
 
-        </div>
-    </section>
+        <!-- Skills Section -->
+        <section id="skills" class="reveal">
+            <h2 class="section-title"><span>02.</span> Technical Toolkit</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <i class="fa-solid fa-cloud"></i>
+                    <h3>Cloud & AWS</h3>
+                    <ul>
+                        <li>IAM Policies & Role Management</li>
+                        <li>VPC Networking & Security Groups</li>
+                        <li>EC2 Hardening & Storage (S3, RDS)</li>
+                        <li>Monitoring & Auto-Scaling</li>
+                    </ul>
+                </div>
+                <div class="skill-card">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <h3>Offensive & Defensive Security</h3>
+                    <ul>
+                        <li>Vulnerability Scanning & Assessment</li>
+                        <li>Network Traffic Analysis (Wireshark)</li>
+                        <li>Packet Manipulation (Scapy)</li>
+                        <li>Basic Penetration Testing Modules</li>
+                    </ul>
+                </div>
+                <div class="skill-card">
+                    <i class="fa-solid fa-screwdriver-wrench"></i>
+                    <h3>Security Tools</h3>
+                    <ul>
+                        <li>Kali Linux Suite</li>
+                        <li>WPScan & Hydra Brute-forcing</li>
+                        <li>PyTorch (AI/ML integration)</li>
+                        <li>FastAPI Backend Services</li>
+                    </ul>
+                </div>
+                <div class="skill-card">
+                    <i class="fa-solid fa-code"></i>
+                    <h3>Scripting & Development</h3>
+                    <ul>
+                        <li>Python Automation</li>
+                        <li>C++ & System Logic</li>
+                        <li>ASP.NET Core MVC Basics</li>
+                        <li>HTML / Modern Web UI</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
 
-    <!-- 04. Certifications -->
-    <section id="certs">
-        <h2 class="section-title"><span>04.</span> Certifications</h2>
-        <div class="certs-grid">
-            
-            <!-- Palo Alto -->
-            <div class="cert-card">
-                <div>
+        <!-- Projects Section -->
+        <section id="projects" class="reveal">
+            <h2 class="section-title"><span>03.</span> Key Projects & Experience</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div>
+                        <h3>Malware Analysis Assistant (MAA)</h3>
+                        <p>Led the development of a framework designed to streamline malware investigation. It helps analysts inspect suspicious files, analyze network packets, and generate quick triage reports.</p>
+                        <div class="tech-tags">
+                            <span>Python</span>
+                            <span>Scapy</span>
+                            <span>PyTorch</span>
+                            <span>FastAPI</span>
+                        </div>
+                    </div>
+                    <a href="prot/maa-project.pdf" target="_blank" class="btn btn-outline" style="font-size: 0.85rem; padding: 8px 16px;">Contact for Details</a>
+                </div>
+                <div class="project-card">
+                    <div>
+                        <h3>Attack Simulation & Mitigation Lab</h3>
+                        <p>Simulated brute-force login attempts using Hydra to evaluate authentication weaknesses. Designed defense strategies including custom fail2ban rules and multi-factor authentication requirements.</p>
+                        <div class="tech-tags">
+                            <span>Hydra</span>
+                            <span>Linux Hardening</span>
+                            <span>fail2ban</span>
+                            <span>MFA</span>
+                        </div>
+                    </div>
+                    <a href="prot/hydra-lab.pdf" target="_blank" class="btn btn-outline" style="font-size: 0.85rem; padding: 8px 16px;">Contact for Details</a>
+                </div>
+                <div class="project-card">
+                    <div>
+                        <h3>DEPI Cloud Security Track</h3>
+                        <p>Participated in intensive AWS practical labs, implementing strict identity permissions, setting up isolated subnets, and scripting cloud monitoring tasks.</p>
+                        <div class="tech-tags">
+                            <span>AWS IAM</span>
+                            <span>VPC Isolation</span>
+                            <span>EC2</span>
+                            <span>CloudWatch</span>
+                        </div>
+                    </div>
+                    <a href="prot/depi-track.pdf" target="_blank" class="btn btn-outline" style="font-size: 0.85rem; padding: 8px 16px;">View Track</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certifications Section -->
+        <section id="certs" class="reveal">
+            <h2 class="section-title"><span>04.</span> Certifications</h2>
+            <div class="certs-grid">
+                <div class="cert-card">
                     <div class="cert-img-container">
                         <img src="images/palo_alto.png" alt="Palo Alto Networks" onerror="this.src='https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=200&auto=format&fit=crop&q=60'">
                     </div>
-                    <h4>Palo Alto Networks</h4>
-                    <span>Cybersecurity Foundation Certificate</span>
+                    <div>
+                        <h4>Palo Alto Networks</h4>
+                        <span>Cybersecurity Foundation Certificate</span>
+                    </div>
+                    <a href="prot/palo-alto-cert.pdf" target="_blank" class="cert-link">Verified</a>
                 </div>
-                <a href="prot/palo-alto-cert.pdf" target="_blank" class="cert-badge green">
-                    <i class="fa-solid fa-file-pdf"></i> Verified
-                </a>
-            </div>
 
-            <!-- INNOVERA -->
-            <div class="cert-card">
-                <div>
+                <div class="cert-card">
                     <div class="cert-img-container">
                         <img src="images/innovera.png" alt="INNOVERA Academy" onerror="this.src='https://images.unsplash.com/photo-1573164713988-8665fc963095?w=200&auto=format&fit=crop&q=60'">
                     </div>
-                    <h4>INNOVERA Academy</h4>
-                    <span>Cybersecurity Diploma</span>
+                    <div>
+                        <h4>INNOVERA Academy</h4>
+                        <span>Cybersecurity Diploma</span>
+                    </div>
+                    <a href="prot/innovera-cert.pdf" target="_blank" class="cert-link">Verified</a>
                 </div>
-                <a href="prot/innovera-cert.pdf" target="_blank" class="cert-badge green">
-                    <i class="fa-solid fa-file-pdf"></i> Verified
-                </a>
-            </div>
 
-            <!-- MCIT -->
-            <div class="cert-card">
-                <div>
+                <div class="cert-card">
                     <div class="cert-img-container">
                         <img src="images/mcit.png" alt="MCIT" onerror="this.src='https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=200&auto=format&fit=crop&q=60'">
                     </div>
-                    <h4>MCIT</h4>
-                    <span>Python Programming Professional Certificate</span>
+                    <div>
+                        <h4>MCIT</h4>
+                        <span>Python Programming Professional Certificate</span>
+                    </div>
+                    <a href="prot/mcit-cert.pdf" target="_blank" class="cert-link">Verified</a>
                 </div>
-                <a href="prot/mcit-cert.pdf" target="_blank" class="cert-badge green">
-                    <i class="fa-solid fa-file-pdf"></i> Verified
-                </a>
-            </div>
 
-           
-            <div class="cert-card">
-                <div>
+                <div class="cert-card">
                     <div class="cert-img-container">
                         <img src="images/nti.png" alt="NTI Training" onerror="this.src='https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=200&auto=format&fit=crop&q=60'">
                     </div>
-                    <h4>NTI Training</h4>
-                    <span>Network Defense & Vulnerability Auditing</span>
+                    <div>
+                        <h4>NTI Training</h4>
+                        <span>Network Defense & Vulnerability Auditing</span>
+                    </div>
+                    <span style="font-size: 0.75rem; color: var(--accent-cyan); margin-top: 10px;">Completed</span>
                 </div>
-                <span class="cert-badge cyan static">Completed</span>
             </div>
+        </section>
 
-        </div>
-    </section>
+        <!-- Contact Section -->
+        <section id="contact" class="reveal">
+            <h2 class="section-title" style="justify-content: center;"><span>05.</span> Get In Touch</h2>
+            <div class="contact-box">
+                <p>I'm open to discussing cloud security roles, penetration testing projects, or general technical queries. Feel free to reach out directly.</p>
+                <div class="contact-links">
+                    <button class="contact-btn" onclick="copyToClipboard('daz10675404@gmail.com', 'Email copied to clipboard!')"><i class="fa-solid fa-envelope"></i> daz10675404@gmail.com</button>
+                    <a href="https://www.linkedin.com/in/david-zaref-397917376" target="_blank" class="contact-btn" style="text-decoration: none;"><i class="fa-brands fa-linkedin"></i> LinkedIn Profile</a>
+                </div>
+            </div>
+        </section>
 
+    </div>
+
+    <div id="toast"></div>
+
+    <footer>
+        <p>© 2026 David Zaref. Built with focus on clean code and design.</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Matrix Rain Background
+        const canvas = document.getElementById('matrix-canvas');
+        const ctx = canvas.getContext('2d');
+        function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        const alphabet = '日ﾊﾐﾋｰｳｼﾅﾓﾆｻﾜﾂｵﾘｱﾎﾃﾏｹﾒｴｶｷﾑﾕﾗｾﾈｽﾀﾇﾍABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*';
+        const fontSize = 14;
+        let columns = canvas.width / fontSize;
+        const rainDrops = [];
+        for (let x = 0; x < columns; x++) { rainDrops[x] = 1; }
+
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(7, 9, 14, 0.08)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#00ff66';
+            ctx.font = fontSize + 'px monospace';
+            for (let i = 0; i < rainDrops.length; i++) {
+                const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+                ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
+                if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.975) { rainDrops[i] = 0; }
+                rainDrops[i]++;
+            }
+        }
+        setInterval(drawMatrix, 30);
+
+        // Mouse Spotlight
+        const spotlight = document.getElementById('spotlight');
+        window.addEventListener('mousemove', (e) => {
+            spotlight.style.left = e.clientX + 'px';
+            spotlight.style.top = e.clientY + 'px';
+        });
+
+        // Typing Effect
+        const words = ["Cloud Security Engineer", "Cybersecurity Engineer", "AWS Infrastructure Auditor", "Python Security Developer"];
+        let i = 0;
+        function typingEffect() {
+            let word = words[i].split("");
+            var loopTyping = function() {
+                if (word.length > 0) { document.getElementById('typing-text').innerHTML += word.shift(); }
+                else { setTimeout(deletingEffect, 2000); return false; }
+                setTimeout(loopTyping, 70);
+            };
+            loopTyping();
+        }
+        function deletingEffect() {
+            let word = words[i].split("");
+            var loopDeleting = function() {
+                if (word.length > 0) {
+                    word.pop();
+                    document.getElementById('typing-text').innerHTML = word.join("");
+                } else {
+                    i = (words.length > (i + 1)) ? i + 1 : 0;
+                    setTimeout(typingEffect, 400);
+                    return false;
+                }
+                setTimeout(loopDeleting, 35);
+            };
+            loopDeleting();
+        }
+        typingEffect();
+
+        // Scroll Reveal
+        window.addEventListener('DOMContentLoaded', () => {
+            const reveals = document.querySelectorAll('.reveal');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+            }, { threshold: 0.1 });
+            reveals.forEach(reveal => observer.observe(reveal));
+        });
+
+        // Clipboard Copy
+        function copyToClipboard(text, message) {
+            navigator.clipboard.writeText(text).then(() => { showToast(message); });
+        }
+        function showToast(msg) {
+            const toast = document.getElementById("toast");
+            toast.className = "show";
+            toast.innerText = "> " + msg;
+            setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
+        }
+    </script>
 </body>
 </html>
