@@ -1,118 +1,310 @@
-<!-- 03. Key Projects & Experience -->
-<section id="projects" class="reveal">
-    <h2 class="section-title"><span>03.</span> Key Projects & Experience</h2>
-    <div class="projects-grid">
-        <!-- Project 1: MAA -->
-        <div class="project-card">
-            <div>
-                <h3>Malware Analysis Assistant (MAA)</h3>
-                <p>Led the development of a framework designed to streamline malware investigation. It helps analysts inspect suspicious files, analyze network packets, and generate quick triage reports.</p>
-                <div class="tech-tags">
-                    <span>Python</span>
-                    <span>Scapy</span>
-                    <span>PyTorch</span>
-                    <span>FastAPI</span>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>David Zaref - Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-dark: #0a0e17;
+            --card-bg: #111827;
+            --text-main: #e2e8f0;
+            --text-muted: #94a3b8;
+            --accent-green: #10b981;
+            --accent-cyan: #06b6d4;
+            --border-color: #1f2937;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 40px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        section {
+            margin-bottom: 50px;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title span {
+            color: var(--accent-green);
+            font-family: monospace;
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .project-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .project-card h3 {
+            color: #fff;
+            margin-bottom: 12px;
+            font-size: 1.2rem;
+        }
+
+        .project-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 16px;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .tech-tags span {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--accent-green);
+            font-size: 0.8rem;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-family: monospace;
+        }
+
+        /* Certs Grid */
+        .certs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .cert-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .cert-img-container {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .cert-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .cert-card h4 {
+            color: #fff;
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+
+        .cert-card span {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            display: block;
+        }
+
+        /* Buttons & Links */
+        .btn-pdf {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--accent-green);
+            border: 1px solid var(--accent-green);
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-pdf:hover {
+            background: rgba(16, 185, 129, 0.1);
+        }
+
+        .cert-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 12px;
+            font-size: 0.85rem;
+            padding: 4px 14px;
+            border-radius: 4px;
+            text-decoration: none;
+        }
+
+        .cert-badge.green {
+            color: var(--accent-green);
+            border: 1px solid var(--accent-green);
+        }
+
+        .cert-badge.cyan {
+            color: var(--accent-cyan);
+            border: 1px solid var(--accent-cyan);
+        }
+
+        .cert-badge.static {
+            cursor: default;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 03. Key Projects & Experience -->
+    <section id="projects">
+        <h2 class="section-title"><span>03.</span> Key Projects & Experience</h2>
+        <div class="projects-grid">
+            
+            <!-- Project 1 -->
+            <div class="project-card">
+                <div>
+                    <h3>Malware Analysis Assistant (MAA)</h3>
+                    <p>Led the development of a framework designed to streamline malware investigation. It helps analysts inspect suspicious files, analyze network packets, and generate quick triage reports.</p>
+                    <div class="tech-tags">
+                        <span>Python</span>
+                        <span>Scapy</span>
+                        <span>PyTorch</span>
+                        <span>FastAPI</span>
+                    </div>
                 </div>
+                <a href="prot/maa-project.pdf" target="_blank" class="btn-pdf">
+                    <i class="fa-solid fa-file-pdf"></i> View Project PDF
+                </a>
             </div>
-            <a href="prot/maa-project.pdf" target="_blank" class="btn btn-outline" style="font-size: 0.85rem; padding: 8px 16px;">
-                <i class="fa-solid fa-file-pdf"></i> View Project PDF
-            </a>
-        </div>
 
-        <!-- Project 2: Attack Simulation -->
-        <div class="project-card">
-            <div>
-                <h3>Attack Simulation & Mitigation Lab</h3>
-                <p>Simulated brute-force login attempts using Hydra to evaluate authentication weaknesses. Designed defense strategies including custom fail2ban rules and multi-factor authentication requirements.</p>
-                <div class="tech-tags">
-                    <span>Hydra</span>
-                    <span>Linux Hardening</span>
-                    <span>fail2ban</span>
-                    <span>MFA</span>
+            <!-- Project 2 -->
+            <div class="project-card">
+                <div>
+                    <h3>Attack Simulation & Mitigation Lab</h3>
+                    <p>Simulated brute-force login attempts using Hydra to evaluate authentication weaknesses. Designed defense strategies including custom fail2ban rules and multi-factor authentication requirements.</p>
+                    <div class="tech-tags">
+                        <span>Hydra</span>
+                        <span>Linux Hardening</span>
+                        <span>fail2ban</span>
+                        <span>MFA</span>
+                    </div>
                 </div>
+                <a href="prot/hydra-lab.pdf" target="_blank" class="btn-pdf">
+                    <i class="fa-solid fa-file-pdf"></i> View Project PDF
+                </a>
             </div>
-            <a href="prot/hydra-lab.pdf" target="_blank" class="btn btn-outline" style="font-size: 0.85rem; padding: 8px 16px;">
-                <i class="fa-solid fa-file-pdf"></i> View Project PDF
-            </a>
-        </div>
 
-        <!-- Project 3: DEPI Track -->
-        <div class="project-card">
-            <div>
-                <h3>DEPI Cloud Security Track</h3>
-                <p>Participated in intensive AWS practical labs, implementing strict identity permissions, setting up isolated subnets, and scripting cloud monitoring tasks.</p>
-                <div class="tech-tags">
-                    <span>AWS IAM</span>
-                    <span>VPC Isolation</span>
-                    <span>EC2</span>
-                    <span>CloudWatch</span>
+            <!-- Project 3 -->
+            <div class="project-card">
+                <div>
+                    <h3>DEPI Cloud Security Track</h3>
+                    <p>Participated in intensive AWS practical labs, implementing strict identity permissions, setting up isolated subnets, and scripting cloud monitoring tasks.</p>
+                    <div class="tech-tags">
+                        <span>AWS IAM</span>
+                        <span>VPC Isolation</span>
+                        <span>EC2</span>
+                        <span>CloudWatch</span>
+                    </div>
                 </div>
+                <a href="prot/depi-track.pdf" target="_blank" class="btn-pdf">
+                    <i class="fa-solid fa-file-pdf"></i> View Track PDF
+                </a>
             </div>
-            <a href="prot/depi-track.pdf" target="_blank" class="btn btn-outline" style="font-size: 0.85rem; padding: 8px 16px;">
-                <i class="fa-solid fa-file-pdf"></i> View Track PDF
-            </a>
-        </div>
-    </div>
-</section>
 
-<!-- 04. Certifications -->
-<section id="certs" class="reveal">
-    <h2 class="section-title"><span>04.</span> Certifications</h2>
-    <div class="certs-grid">
-        <!-- Palo Alto -->
-        <div class="cert-card">
-            <div class="cert-img-container">
-                <img src="images/palo_alto.png" alt="Palo Alto Networks" onerror="this.src='https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=200&auto=format&fit=crop&q=60'">
-            </div>
-            <div>
-                <h4>Palo Alto Networks</h4>
-                <span>Cybersecurity Foundation Certificate</span>
-            </div>
-            <a href="prot/palo-alto-cert.pdf" target="_blank" style="text-decoration: none; display: inline-block; margin-top: 10px; font-size: 0.85rem; color: var(--accent-green); border: 1px solid var(--accent-green); padding: 4px 12px; border-radius: 4px;">
-                <i class="fa-solid fa-file-pdf"></i> Verified
-            </a>
         </div>
+    </section>
 
-        <!-- INNOVERA -->
-        <div class="cert-card">
-            <div class="cert-img-container">
-                <img src="images/innovera.png" alt="INNOVERA Academy" onerror="this.src='https://images.unsplash.com/photo-1573164713988-8665fc963095?w=200&auto=format&fit=crop&q=60'">
+    <!-- 04. Certifications -->
+    <section id="certs">
+        <h2 class="section-title"><span>04.</span> Certifications</h2>
+        <div class="certs-grid">
+            
+            <!-- Palo Alto -->
+            <div class="cert-card">
+                <div>
+                    <div class="cert-img-container">
+                        <img src="images/palo_alto.png" alt="Palo Alto Networks" onerror="this.src='https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=200&auto=format&fit=crop&q=60'">
+                    </div>
+                    <h4>Palo Alto Networks</h4>
+                    <span>Cybersecurity Foundation Certificate</span>
+                </div>
+                <a href="prot/palo-alto-cert.pdf" target="_blank" class="cert-badge green">
+                    <i class="fa-solid fa-file-pdf"></i> Verified
+                </a>
             </div>
-            <div>
-                <h4>INNOVERA Academy</h4>
-                <span>Cybersecurity Diploma</span>
-            </div>
-            <a href="prot/innovera-cert.pdf" target="_blank" style="text-decoration: none; display: inline-block; margin-top: 10px; font-size: 0.85rem; color: var(--accent-green); border: 1px solid var(--accent-green); padding: 4px 12px; border-radius: 4px;">
-                <i class="fa-solid fa-file-pdf"></i> Verified
-            </a>
-        </div>
 
-        <!-- MCIT -->
-        <div class="cert-card">
-            <div class="cert-img-container">
-                <img src="images/mcit.png" alt="MCIT" onerror="this.src='https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=200&auto=format&fit=crop&q=60'">
+            <!-- INNOVERA -->
+            <div class="cert-card">
+                <div>
+                    <div class="cert-img-container">
+                        <img src="images/innovera.png" alt="INNOVERA Academy" onerror="this.src='https://images.unsplash.com/photo-1573164713988-8665fc963095?w=200&auto=format&fit=crop&q=60'">
+                    </div>
+                    <h4>INNOVERA Academy</h4>
+                    <span>Cybersecurity Diploma</span>
+                </div>
+                <a href="prot/innovera-cert.pdf" target="_blank" class="cert-badge green">
+                    <i class="fa-solid fa-file-pdf"></i> Verified
+                </a>
             </div>
-            <div>
-                <h4>MCIT</h4>
-                <span>Python Programming Professional Certificate</span>
-            </div>
-            <a href="prot/mcit-cert.pdf" target="_blank" style="text-decoration: none; display: inline-block; margin-top: 10px; font-size: 0.85rem; color: var(--accent-green); border: 1px solid var(--accent-green); padding: 4px 12px; border-radius: 4px;">
-                <i class="fa-solid fa-file-pdf"></i> Verified
-            </a>
-        </div>
 
-        <!-- NTI Training (بدون رابط - شكلي فقط) -->
-        <div class="cert-card">
-            <div class="cert-img-container">
-                <img src="images/nti.png" alt="NTI Training" onerror="this.src='https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=200&auto=format&fit=crop&q=60'">
+            <!-- MCIT -->
+            <div class="cert-card">
+                <div>
+                    <div class="cert-img-container">
+                        <img src="images/mcit.png" alt="MCIT" onerror="this.src='https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=200&auto=format&fit=crop&q=60'">
+                    </div>
+                    <h4>MCIT</h4>
+                    <span>Python Programming Professional Certificate</span>
+                </div>
+                <a href="prot/mcit-cert.pdf" target="_blank" class="cert-badge green">
+                    <i class="fa-solid fa-file-pdf"></i> Verified
+                </a>
             </div>
-            <div>
-                <h4>NTI Training</h4>
-                <span>Network Defense & Vulnerability Auditing</span>
+
+           
+            <div class="cert-card">
+                <div>
+                    <div class="cert-img-container">
+                        <img src="images/nti.png" alt="NTI Training" onerror="this.src='https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=200&auto=format&fit=crop&q=60'">
+                    </div>
+                    <h4>NTI Training</h4>
+                    <span>Network Defense & Vulnerability Auditing</span>
+                </div>
+                <span class="cert-badge cyan static">Completed</span>
             </div>
-            <span style="display: inline-block; margin-top: 10px; font-size: 0.85rem; color: var(--accent-cyan); border: 1px solid var(--accent-cyan); padding: 4px 12px; border-radius: 4px; cursor: default;">
-                Completed
-            </span>
+
         </div>
-    </div>
-</section>
+    </section>
+
+</body>
+</html>
